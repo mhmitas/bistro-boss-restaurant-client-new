@@ -5,7 +5,6 @@ import AboutSection from './about/AboutSection';
 import useMenu from '../../components/hooks/useMenu';
 import PopularMenu from './popular-menu/PopularMenu';
 import FeaturedSection from './featured/FeaturedSection';
-import MyHelmet from '../../components/common/helmet/HelmetContext';
 
 
 const Home = () => {
@@ -17,7 +16,6 @@ const Home = () => {
             <AboutSection></AboutSection>
             <PopularMenu></PopularMenu>
             <FeaturedSection></FeaturedSection>
-
         </div>
     );
 };
