@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import FevoriteDishBtn from "../../../components/common/common-buttons copy/FevoriteDishBtn";
 import MenuCover from "../../../components/common/menu-cover/MenuCover";
 import MenuItemCard from "../../../components/shared/menu-item-card/MenuItemCard";
 import useMenu from "../../../components/hooks/useMenu";
+import FevoriteDishBtn from "../../../components/common/common-buttons/FevoriteDishBtn";
 
 const MenuCategory = ({ title, subTitle, category, image }) => {
 
@@ -18,7 +18,7 @@ const MenuCategory = ({ title, subTitle, category, image }) => {
             </div>
             <div className='text-center'>
                 <Link to={`/order/${title.toLowerCase()}`}>
-                    <FevoriteDishBtn text="order your fevorite food"></FevoriteDishBtn>
+                    <FevoriteDishBtn text="Order your fevorite food"></FevoriteDishBtn>
                 </Link>
             </div>
         </div>
