@@ -5,7 +5,7 @@ import useMenu from '../../../components/hooks/useMenu';
 
 const PopularMenu = () => {
     const [menuItems, setMenuItems] = useState([])
-    const [menu] = useMenu('popular')
+    const [menu] = useMenu('popular', 4)
 
     return (
         <section>
