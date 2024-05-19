@@ -1,10 +1,13 @@
 import React from 'react';
 import { navItems } from './Navlinks';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
+    const { user, authLoading, logOutUser } = useAuth()
+
     return (
-        <div className="navbar bg-black bg-opacity-30 text-slate-50 absolute md:h-20 z-10">
+        <div className="navbar md:h-20 z-10 shadow-md">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -22,7 +25,30 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/auth/login' className="btn">Login</Link>
+                {/* / authentication based UI */}
+                <div>
+                    {/* login logout */}
+                    {authLoading ? <span className=''>Loading...</span> :
+                        user ?
+                            <div className="dropdown dropdown-end">
+                                {/* Profile image section */}
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div title={user?.displayName} className="w-10 rounded-full">
+                                        <img alt={user?.displayName && user.displayName} src={user?.photoURL ? user.photoURL : "https://i.ibb.co/tY0hxsg/default-profile.jpg"}
+                                        />
+                                    </div>
+                                </div>
+                                <ul tabIndex={0} className="mt-3 z-[1] p-2 menu menu-sm dropdown-content bg-base-100 rounded-md w-52 shadow-xl">
+                                    {/* <li><Link to="/profile">Profile</Link></li> */}
+                                    <li><span onClick={logOutUser}>Logout</span></li>
+                                </ul>
+                            </div>
+                            :
+                            <div className='flex gap-3'>
+                                <Link to='/auth/login' className="btn">Login</Link>
+                            </div>
+                    }
+                </div>
             </div>
         </div>
     );
