@@ -1,14 +1,16 @@
 import React from 'react';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const SignUp = () => {
+    const navigate = useNavigate()
     const { createUser, updateUserProfile, setUser } = useAuth()
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm()
 
@@ -21,6 +23,8 @@ const SignUp = () => {
             // Optimistic UI Update
             setUser({ ...result?.user, photoURL: formData.photoUrl, displayName: formData.userName })
             console.log(result);
+            navigate('/')
+            reset()
         }
         catch (err) {
             console.error(err);
