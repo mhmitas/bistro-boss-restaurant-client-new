@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import MenuCover from '../../components/common/menu-cover/MenuCover';
 import axios from 'axios';
-import FoodCard from '../../components/common/food-card/FoodCard';
 import OrderTabContents from './tab/OrderTabContents';
+import { useParams } from 'react-router-dom';
 
 const Order = () => {
-    const [category, setCategory] = useState('salad')
+    const params = useParams()
+    console.log(params?.category);
+    const [category, setCategory] = useState(params?.category)
+    console.log(category);
     const [menu, setMenu] = useState([])
     const [items, setItems] = useState([])
     useEffect(() => {
@@ -30,7 +33,7 @@ const Order = () => {
                     <button className={`tab ${category === 'salad' && 'tab-active text-warning'}`} role='tab' onClick={handleTabButton} value="salad">Salad</button>
                     <button className={`tab ${category === 'pizza' && 'tab-active text-warning'}`} role='tab' onClick={handleTabButton} value="pizza">Pizza</button>
                     <button className={`tab ${category === 'soup' && 'tab-active text-warning'}`} role='tab' onClick={handleTabButton} value="soup">Soups</button>
-                    <button className={`tab ${category === 'dessert' && 'tab-active text-warning'}`} role='tab' onClick={handleTabButton} value="dessert">Disserts</button>
+                    <button className={`tab ${category === 'dessert' && 'tab-active text-warning'}`} role='tab' onClick={handleTabButton} value="dessert">Desserts</button>
 
                 </div>
             </div>

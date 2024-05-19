@@ -6,6 +6,7 @@ import Order from "../pages/order/order";
 import Login from "../pages/authentication/Login";
 import AuthRoutes from "../routes/AuthRoutes";
 import SignUp from "../pages/authentication/SignUp";
+import PriverRoute from "../routes/PriverRoute";
 
 export const router = createBrowserRouter([
     {
@@ -21,8 +22,8 @@ export const router = createBrowserRouter([
                 element: <Menu />
             },
             {
-                path: 'order',
-                element: <Order />
+                path: 'order/:category',
+                element: <PriverRoute><Order /></PriverRoute>
             },
 
         ]

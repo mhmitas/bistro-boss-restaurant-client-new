@@ -18,7 +18,7 @@ const FeaturedSection = () => {
                         <p>May 17th 2024</p>
                         <p className='uppercase'>Where can i get some</p>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit vitae praesentium assumenda placeat necessitatibus recusandae voluptates, non quidem eius minima optio porro hic repudiandae. Quas suscipit numquam aut rem rerum architecto dolorem temporibus sapiente corrupti, dignissimos asperiores! Dolores cum impedit eaque! Laudantium recusandae sint et excepturi accusamus delectus, saepe voluptate.</p>
-                        <button className='btn btn-warning btn-outline w-max border-0 border-b-4 font-bold text-xl'>Order Now</button>
+                        <button className='btn btn-warning btn-outline w-max border-0 border-b-2 font-bold btn-sm rounded-sm'>Order Now</button>
                     </div>
                 </div>
             </div>

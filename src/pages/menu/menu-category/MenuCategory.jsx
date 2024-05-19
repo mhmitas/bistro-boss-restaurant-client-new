@@ -17,7 +17,7 @@ const MenuCategory = ({ title, subTitle, category, image }) => {
                 }
             </div>
             <div className='text-center'>
-                <Link to={`/order/${title.toLowerCase()}`}>
+                <Link to={`/order/${category.toLowerCase()}`}>
                     <FevoriteDishBtn text="Order your fevorite food"></FevoriteDishBtn>
                 </Link>
             </div>
