@@ -10,7 +10,7 @@ const FeaturedSection = () => {
                 <div className='pt-10'>
                     <SectionTitle heading="Featured Item" subHeading="Check it out"></SectionTitle>
                 </div>
-                <div className='md:flex justify-center items-center  md:pb-20 p-4 md:pt-12 pb-8 md:px-36'>
+                <div className='flex justify-center items-center md:flex-col lg:flex-row p-4 pb-8 md:pt-12 md:pb-20 md:px-36'>
                     <div className='hidden md:block'>
                         <img src={featuredImg} alt="" />
                     </div>

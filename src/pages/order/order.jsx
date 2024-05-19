@@ -7,9 +7,8 @@ import { useParams } from 'react-router-dom';
 const Order = () => {
     const params = useParams()
     console.log(params?.category);
+
     const [category, setCategory] = useState(params?.category)
-    console.log(category);
-    const [menu, setMenu] = useState([])
     const [items, setItems] = useState([])
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_URL}/menu?category=${category}`)
@@ -20,7 +19,7 @@ const Order = () => {
     }, [category])
 
     function handleTabButton(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setCategory(e.target.value);
 
     }
@@ -44,11 +43,3 @@ const Order = () => {
 };
 
 export default Order;
-
-{/* <input
-    onClick={handleTabButton}
-    type="radio"
-    value='salad'
-    name="my_tabs_1" role="tab"
-    className={`tab ${category === 'salad' && 'tab-active'} font-bold mb-4`}
-    aria-label="Salad" /> */}
