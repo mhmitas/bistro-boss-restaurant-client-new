@@ -3,6 +3,8 @@ import Root from "../routes/root";
 import Home from "../pages/home/Home";
 import Menu from "../pages/menu/Menu";
 import Order from "../pages/order/order";
+import Login from "../pages/authentication/Login";
+import AuthRoutes from "../routes/AuthRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -14,13 +16,25 @@ export const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: '/menu',
+                path: 'menu',
                 element: <Menu />
             },
             {
-                path: '/order',
+                path: 'order',
                 element: <Order />
             },
+
         ]
     },
+    {
+        path: 'auth',
+        element: <AuthRoutes></AuthRoutes>,
+        children: [
+            {
+                path: 'login',
+                element: <Login />
+            },
+        ]
+    }
+
 ]);
