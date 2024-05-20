@@ -4,14 +4,24 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import useCart from '../../hooks/useCart';
 
 const FoodCard = ({ item }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useAuth()
+    const [cart, refetch] = useCart()
     let { name, image, price, recipe, category, _id } = item;
 
-    function handleAddToCart(item) {
+    // extracting itemIds from cart items and checking does the _id(which i want to add) already exist?  
+    const cartItemsIds = cart.map(item => item.itemId)
+    const doesExists = cartItemsIds.includes(_id)
+
+    function handleAddToCart() {
+        if (doesExists) {
+            // toast.error('already exists')
+            return
+        }
         if (user && user.email) {
             const cartItem = {
                 itemId: _id,
@@ -23,6 +33,8 @@ const FoodCard = ({ item }) => {
                     if (res.data?.insertedId) {
                         toast.success(`${name} added to the cart`)
                     }
+                    // refetch the cart to update the cart 
+                    refetch()
                 })
         } else {
             Swal.fire({
@@ -53,8 +65,10 @@ const FoodCard = ({ item }) => {
                     <p className="">{recipe.slice(0, 66)}</p>
                     <div className='card-actions justify-center mt-2'>
                         <button
-                            onClick={() => handleAddToCart(item)}
-                            className='uppercase btn btn-warning btn-outline font-semibold  border-0 border-b-2 btn-sm rounded-sm'>Add to cart</button>
+                            onClick={handleAddToCart}
+                            className='uppercase btn btn-warning btn-outline font-semibold  border-0 border-b-2 btn-sm rounded-sm'
+                        >{doesExists ? 'Added' : 'Add to cart'}
+                        </button>
                     </div>
                 </div>
             </div>

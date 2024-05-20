@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
     const location = useLocation()
-    console.log(location.state?.from?.pathname);
     const form = location.state?.from?.pathname
     // console.log(location.state);
     const navigate = useNavigate()
@@ -27,6 +26,7 @@ const Login = () => {
                 navigate(form ? form : '/');
             }).catch(err => {
                 console.log(err);
+                toast.error(err.message.slice(10))
             })
     }
     return (
