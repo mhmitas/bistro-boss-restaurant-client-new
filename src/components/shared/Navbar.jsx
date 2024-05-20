@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { navItems } from './Navlinks';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../hooks/useCart';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Navbar = () => {
     const { user, authLoading, logOutUser } = useAuth()
+    const [cart] = useCart()
+    // const axiosSecure = useAxiosSecure()
+    // useEffect(() => {
+    //     axiosSecure.get('/carts')
+    //         .then(res => {
+    //             console.log(res.data);
+    //         })
+    // }, [])
 
     return (
         <div className="navbar md:h-20 z-10 shadow-md">
@@ -30,7 +40,7 @@ const Navbar = () => {
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle mx-1">
                     <div className="indicator mx-4">
                         <FaShoppingCart className='text-xl' />
-                        <span className="badge badge-sm badge-primary indicator-item">8</span>
+                        <span className="badge badge-sm badge-primary indicator-item">{cart.length}</span>
                     </div>
                 </div>
                 {/* / authentication based UI */}

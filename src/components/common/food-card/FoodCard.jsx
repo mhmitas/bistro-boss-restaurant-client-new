@@ -2,17 +2,28 @@ import React from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 const FoodCard = ({ item }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useAuth()
-    let { name, image, price, recipe, category } = item;
+    let { name, image, price, recipe, category, _id } = item;
 
     function handleAddToCart(item) {
         if (user && user.email) {
-            console.log(item);
-
+            const cartItem = {
+                itemId: _id,
+                userId: user.uid
+            }
+            axios.post(`${import.meta.env.VITE_URL}/carts`, cartItem)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data?.insertedId) {
+                        toast.success(`${name} added to the cart`)
+                    }
+                })
         } else {
             Swal.fire({
                 title: "You are not Logged In",
