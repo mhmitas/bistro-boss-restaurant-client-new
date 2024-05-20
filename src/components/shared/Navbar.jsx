@@ -2,6 +2,7 @@ import React from 'react';
 import { navItems } from './Navlinks';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
     const { user, authLoading, logOutUser } = useAuth()
@@ -25,6 +26,13 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                {/* shopping cart icon  */}
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle mx-1">
+                    <div className="indicator mx-4">
+                        <FaShoppingCart className='text-xl' />
+                        <span className="badge badge-sm badge-primary indicator-item">8</span>
+                    </div>
+                </div>
                 {/* / authentication based UI */}
                 <div>
                     {/* login logout */}

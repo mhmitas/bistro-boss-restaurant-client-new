@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 const Order = () => {
     const params = useParams()
-    console.log(params?.category);
+    // console.log(params?.category);
 
     const [category, setCategory] = useState(params?.category)
     const [items, setItems] = useState([])

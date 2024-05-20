@@ -13,7 +13,12 @@ const PriverRoute = ({ children }) => {
     if (user) {
         return children
     }
-    return <Navigate to='/auth/login' state={location.pathname} replace></Navigate>
+    return <Navigate to='/auth/login' state={{ from: location }} replace></Navigate>
 };
 
 export default PriverRoute;
+
+/**
+ * state={{ from: location }} [privet route style: ekhane ekti attribute set kora hoyech state nam e jar under e ekti object ache]
+ * state: { from: location } } [food card style]
+ */

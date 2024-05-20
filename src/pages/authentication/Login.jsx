@@ -7,7 +7,9 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
     const location = useLocation()
-    console.log(location.state);
+    console.log(location.state?.from?.pathname);
+    const form = location.state?.from?.pathname
+    // console.log(location.state);
     const navigate = useNavigate()
     const { loginUser } = useAuth()
     const {
@@ -22,7 +24,7 @@ const Login = () => {
             .then(result => {
                 // console.log(result.user);
                 toast.success('Login success')
-                navigate(location?.state ? location.state : '/');
+                navigate(form ? form : '/');
             }).catch(err => {
                 console.log(err);
             })
