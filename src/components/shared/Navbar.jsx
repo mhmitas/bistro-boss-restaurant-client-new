@@ -9,13 +9,6 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 const Navbar = () => {
     const { user, authLoading, logOutUser } = useAuth()
     const [cart] = useCart()
-    // const axiosSecure = useAxiosSecure()
-    // useEffect(() => {
-    //     axiosSecure.get('/carts')
-    //         .then(res => {
-    //             console.log(res.data);
-    //         })
-    // }, [])
 
     return (
         <div className="navbar md:h-20 z-10 shadow-md">
@@ -28,7 +21,7 @@ const Navbar = () => {
                         {navItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost font-bold md:text-2xl">Bistro Boss</Link>
+                <Link to='/' className="btn btn-ghost font-bold md:text-2xl text-xl">Bistro Boss</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -37,12 +30,14 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {/* shopping cart icon  */}
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle mx-1">
-                    <div className="indicator mx-4">
-                        <FaShoppingCart className='text-xl' />
-                        <span className="badge badge-sm badge-primary indicator-item">{cart.length}</span>
+                <Link to="/dashboard/cart">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle mx-1">
+                        <div className="indicator mx-4">
+                            <FaShoppingCart className='text-xl' />
+                            <span className="badge badge-sm badge-primary indicator-item">{cart.length}</span>
+                        </div>
                     </div>
-                </div>
+                </Link>
                 {/* / authentication based UI */}
                 <div>
                     {/* login logout */}

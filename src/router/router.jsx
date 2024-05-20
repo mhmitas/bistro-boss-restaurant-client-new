@@ -8,9 +8,12 @@ import AuthRoutes from "../routes/AuthRoutes";
 import SignUp from "../pages/authentication/SignUp";
 import PriverRoute from "../routes/PriverRoute";
 import Secret from "../pages/secret";
+import Dashboard from "../routes/Dashboard";
+import Cart from "../pages/dashboard/cart/Cart";
 
 export const router = createBrowserRouter([
     {
+        // Root layout
         path: "/",
         element: <Root />,
         children: [
@@ -44,6 +47,17 @@ export const router = createBrowserRouter([
                 path: 'signup',
                 element: <SignUp />
             },
+        ]
+    },
+    {
+        // Dashboard layout
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'cart',
+                element: <Cart></Cart>
+            }
         ]
     }
 
