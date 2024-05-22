@@ -1,3 +1,7 @@
+////////////////////////////////
+//      DashBoard is not     //
+//        Responsive         //
+///////////////////////////////
 import React from 'react';
 import { FaCalendar, FaHome, FaPlus, FaShoppingCart } from 'react-icons/fa';
 import { Link, NavLink, Outlet } from 'react-router-dom'
@@ -38,7 +42,6 @@ const Dashboard = () => {
             </div>
             {/* Dashboard content */}
             <div className='flex-1'>
-                MY cart
                 <Outlet></Outlet>
             </div>
         </div>
