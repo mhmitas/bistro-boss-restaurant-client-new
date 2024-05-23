@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import SocialLogin from '../../components/shared/SocilalLogin/SocilalLogin';
 
 const Login = () => {
     const location = useLocation()
@@ -62,11 +63,7 @@ const Login = () => {
                         <div className="divider mt-6">Or continue with</div>
                         <div className="form-control">
                             <div className="flex justify-center space-x-2 mt-4">
-                                <button
-                                    onClick={() => handlePopupSignIn(googleProvider)}
-                                    className="btn btn-outline btn-icon btn-google">
-                                    <FaGoogle className='text-xl' /> Google
-                                </button>
+                                <SocialLogin />
                             </div>
                         </div>
                     </div>

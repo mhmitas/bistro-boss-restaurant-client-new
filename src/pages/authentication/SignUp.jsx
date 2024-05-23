@@ -3,8 +3,10 @@ import useAuth from '../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useAxiosPublic from '../../components/hooks/useAxiosPublic';
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { createUser, updateUserProfile, setUser } = useAuth()
     const {
@@ -22,9 +24,21 @@ const SignUp = () => {
             await updateUserProfile(formData.userName, formData.photoUrl)
             // Optimistic UI Update
             setUser({ ...result?.user, photoURL: formData.photoUrl, displayName: formData.userName })
-            console.log(result);
-            navigate('/')
-            reset()
+            // Create user entry in database
+            const userInfo = {
+                name: formData.email,
+                email: formData.email,
+                uid: formData.uid
+            }
+            axiosPublic.post(`/users`, userInfo)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        console.log(res.data);
+                        console.log(result);
+                        navigate('/')
+                        reset()
+                    }
+                }).catch(err => console.error(err))
         }
         catch (err) {
             console.error(err);
