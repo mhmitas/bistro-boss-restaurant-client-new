@@ -5,11 +5,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/dashboard/sidebar/Sidebar';
+import useAdmin from '../components/hooks/useAdmin';
 
 const Dashboard = () => {
 
     // todo: get isAdmin value from database
-    const isAdmin = true
+    const [isAdmin] = useAdmin()
 
     return (
         <div className='flex'>

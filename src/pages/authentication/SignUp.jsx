@@ -17,7 +17,7 @@ const SignUp = () => {
     } = useForm()
 
     async function onSubmit(formData, e) {
-        console.log(formData);
+        // console.log(formData);
         try {
             const result = await createUser(formData.email, formData.password)
             // update user profile
@@ -26,15 +26,16 @@ const SignUp = () => {
             setUser({ ...result?.user, photoURL: formData.photoUrl, displayName: formData.userName })
             // Create user entry in database
             const userInfo = {
-                name: formData.name,
-                email: formData.email,
-                uid: formData.uid
+                name: result.user?.displayName,
+                email: result.user?.email,
+                uid: result.user?.uid
             }
             axiosPublic.post(`/users`, userInfo)
                 .then(res => {
                     if (res.data.insertedId) {
                         console.log(res.data);
-                        console.log(result);
+                        // console.log(result);
+                        toast.success('Thanks For Joning')
                         navigate('/')
                         reset()
                     }

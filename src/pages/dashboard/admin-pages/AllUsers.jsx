@@ -9,21 +9,17 @@ import toast from "react-hot-toast";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [], isPending, refetch } = useQuery({
+    const { data: users = [], isPending, refetch, error } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('/users', {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('access-token')}`
-                }
-            })
+            const { data } = await axiosSecure.get('/users')
             // console.log(data);
             return data
         }
     })
 
-    function handleDelete(id) {
-        // console.log(id);
+    function handleDelete(user) {
+        console.log(user);
         try {
             Swal.fire({
                 title: "Are you sure?",
@@ -35,7 +31,7 @@ const AllUsers = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     // i will delete it
-                    axiosSecure.delete(`/users/${id}`)
+                    axiosSecure.delete(`/users/${user._id}`)
                         .then(res => {
                             // console.log(res.data);
                             if (res.data.deletedCount) {
@@ -64,7 +60,7 @@ const AllUsers = () => {
     }
 
     if (isPending) return <LoadingBars />
-
+    if (error) return <span>{error.message}</span>
     return (
         <Container>
             <div>
