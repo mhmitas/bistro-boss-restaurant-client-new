@@ -12,7 +12,11 @@ const AllUsers = () => {
     const { data: users = [], isPending, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('/users')
+            const { data } = await axiosSecure.get('/users', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('access-token')}`
+                }
+            })
             // console.log(data);
             return data
         }
@@ -104,6 +108,7 @@ export default AllUsers;
 
 const UsersTableRow = ({ user, index, handleDelete, handleMakeAdmin }) => {
     const { name, email, _id } = user
+
     return (
         <>
             <tr>
@@ -113,7 +118,7 @@ const UsersTableRow = ({ user, index, handleDelete, handleMakeAdmin }) => {
                 <td>
                     {
                         user?.role === 'admin' ?
-                            'Admin'
+                            <span className="text-primary">Admin</span>
                             :
                             <button onClick={() => handleMakeAdmin(user)} className='btn btn-neutral btn-xs'><FaUserAlt /></button>
                     }

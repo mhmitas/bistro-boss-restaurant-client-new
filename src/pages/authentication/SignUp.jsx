@@ -26,7 +26,7 @@ const SignUp = () => {
             setUser({ ...result?.user, photoURL: formData.photoUrl, displayName: formData.userName })
             // Create user entry in database
             const userInfo = {
-                name: formData.email,
+                name: formData.name,
                 email: formData.email,
                 uid: formData.uid
             }
