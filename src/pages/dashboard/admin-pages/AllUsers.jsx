@@ -47,6 +47,9 @@ const AllUsers = () => {
     }
 
     async function handleMakeAdmin(user) {
+        if (!confirm('You are making this user an admin')) {
+            return
+        }
         try {
             const { data } = await axiosSecure.patch(`/users/admin/${user._id}`)
             if (data.modifiedCount > 0) {
@@ -69,7 +72,7 @@ const AllUsers = () => {
                     <h3 className="text-xl text-center my-4">Total Users: {users.length}</h3>
                 </div>
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra bg-base-100">
+                    <table className="table bg-base-100">
                         {/* head */}
                         <thead className='bg-base-300'>
                             <tr>
@@ -114,7 +117,7 @@ const UsersTableRow = ({ user, index, handleDelete, handleMakeAdmin }) => {
                 <td>
                     {
                         user?.role === 'admin' ?
-                            <span className="text-primary">Admin</span>
+                            <span className="badge badge-primary">Admin</span>
                             :
                             <button onClick={() => handleMakeAdmin(user)} className='btn btn-neutral btn-xs'><FaUserAlt /></button>
                     }

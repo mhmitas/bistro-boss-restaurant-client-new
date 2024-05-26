@@ -11,7 +11,8 @@ export default {
     themes: [
       "light",
       "dark",
-      "dracula",
+      "night",
+      "black",
       {
         dashboard: {
           "primary": "#570DF8",

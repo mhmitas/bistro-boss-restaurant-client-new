@@ -6,6 +6,9 @@ import axios from 'axios'
 import toast from 'react-hot-toast'
 import useCart from '../../hooks/useCart';
 
+/////////////////////////////////////////////////////////////////
+// TODO: REMOVE ALL FUNCTIONALITY FROM CARD TO THE ORDER PAGE ///
+/////////////////////////////////////////////////////////////////
 const FoodCard = ({ item }) => {
     const navigate = useNavigate()
     const location = useLocation()
@@ -25,7 +28,8 @@ const FoodCard = ({ item }) => {
         if (user && user.email) {
             const cartItem = {
                 itemId: _id,
-                userId: user.uid
+                userId: user.uid,
+                userEmail: user.email
             }
             axios.post(`${import.meta.env.VITE_URL}/carts`, cartItem)
                 .then(res => {

@@ -11,7 +11,7 @@ const useCart = () => {
     const { data: cart = [], refetch } = useQuery({
         queryKey: ['cart', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/carts/${user.uid}`)
+            const res = await axiosSecure.get(`/carts/${user.email}`)
             return res.data;
         }
     })
@@ -25,9 +25,9 @@ function useCartItems() {
     const axiosSecure = useAxiosSecure()
 
     const { data: cartItems = [], isLoading, refetch } = useQuery({
-        queryKey: ['cartItems', user?.uid], // error aschilo because ekhane may be instance user ke dorkar?
+        queryKey: ['cartItems', user?.email], // error aschilo because ekhane may be instance user ke dorkar?
         queryFn: async () => {
-            const res = await axiosSecure.get(`/menu-items/${user.uid}`)
+            const res = await axiosSecure.get(`/menu-items/${user.email}`)
             return res.data
         }
     })

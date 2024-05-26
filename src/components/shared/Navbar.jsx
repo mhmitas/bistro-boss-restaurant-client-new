@@ -11,7 +11,7 @@ const Navbar = () => {
     const [cart] = useCart()
 
     return (
-        <div className="navbar md:h-20 z-10 shadow-md">
+        <div className="navbar md:h-20 z-10 shadow-md bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
