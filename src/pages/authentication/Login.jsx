@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useForm } from "react-hook-form"
 import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { FaGoogle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import SocialLogin from '../../components/shared/SocilalLogin/SocilalLogin';
 

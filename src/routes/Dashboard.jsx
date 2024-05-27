@@ -10,12 +10,12 @@ import useAdmin from '../components/hooks/useAdmin';
 const Dashboard = () => {
 
     // todo: get isAdmin value from database
-    const [isAdmin] = useAdmin()
+    const [isAdmin, isAdminLoading] = useAdmin()
 
     return (
         <div className='flex'>
             {/* // Dashboard sidebar */}
-            <Sidebar isAdmin={isAdmin} />
+            <Sidebar isAdmin={isAdmin} isAdminLoading={isAdminLoading} />
             {/* Dashboard content */}
             <div className='flex-1'>
                 <Outlet></Outlet>

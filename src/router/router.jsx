@@ -11,6 +11,8 @@ import Secret from "../pages/secret";
 import Dashboard from "../routes/Dashboard";
 import Cart from "../pages/dashboard/cart/Cart";
 import AllUsers from "../pages/dashboard/admin-pages/AllUsers";
+import AddItems from "../pages/dashboard/admin-pages/AddItems";
+import AdminRoute from "../routes/AdminRoute";
 
 export const router = createBrowserRouter([
     {
@@ -28,7 +30,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'order/:category',
-                element: <Order />
+                element: <PriverRoute><Order /></PriverRoute>
             },
             {
                 path: 'secret',
@@ -64,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manage-users',
                 element: <AllUsers></AllUsers>
+            },
+            {
+                path: 'add-items',
+                element: <AdminRoute><AddItems></AddItems></AdminRoute>
             },
         ]
     }

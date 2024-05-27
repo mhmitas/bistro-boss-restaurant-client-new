@@ -10,7 +10,7 @@ const MenuItemCard = ({ item }) => {
             </div>
             <div className='col-span-3 space-y-2'>
                 <h3 className='uppercase'>{name} -----------</h3>
-                <p className='text-justify'>"{recipe}"</p>
+                <p className='text-justify'>"{recipe?.slice(0, 132)}{recipe.length > 133 && '...'}"</p>
                 <p>Category: <span className='badge badge-info '>{category}</span></p>
             </div>
             <div className='flex justify-end'>

@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from '../firebase/firebase.config';
-import useAxiosPublic from '../components/hooks/useAxiosPublic';
+import axios from 'axios';
+// import useAxiosPublic from '../components/hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
@@ -9,7 +10,8 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [authLoading, setAuthLoading] = useState(true)
-    const axiosPublic = useAxiosPublic()
+    // For the bellow line a error was comming and running away.
+    // const axiosPublic = useAxiosPublic()
 
     function createUser(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -38,7 +40,7 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 // get token and store:
                 const userInfo = { email: currentUser?.email, uid: currentUser?.uid }
-                axiosPublic.post('/jwt', userInfo)
+                axios.post(`${import.meta.env.VITE_URL}/jwt`, userInfo)
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token)

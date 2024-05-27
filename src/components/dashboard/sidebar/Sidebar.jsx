@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { MdMenu, MdMenuBook, MdReviews } from "react-icons/md";
 import { ImSpoonKnife } from "react-icons/im";
 
-const Sidebar = ({ isAdmin }) => {
+const Sidebar = ({ isAdmin, isAdminLoading }) => {
 
     const userNavLinks = <>
         <li>
@@ -49,7 +49,10 @@ const Sidebar = ({ isAdmin }) => {
                     <Link to='/' className="btn btn-ghost font-bold md:text-2xl text-xl">Bistro Boss</Link>
                 </div>
                 <ul className='menu *:font-semibold pt-0'>
-                    {
+                    {/* conditional navlinks */}
+                    {isAdminLoading ?
+                        <span className='m-auto text-xl'>Loading...</span>
+                        :
                         isAdmin ?
                             adminNavLinks
                             :
