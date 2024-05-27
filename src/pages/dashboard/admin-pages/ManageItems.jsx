@@ -3,22 +3,29 @@ import SectionTitle from '../../../components/common/section-title/SectionTitle'
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import useMenu from '../../../components/hooks/useMenu';
 import Container from '../../../components/common/container/Container';
-import ConfirmModal from '../../../components/common/modal/ConfirmModla';
+import confirm from '../../../components/common/modal/confirm';
+import useAxiosSecure from '../../../components/hooks/useAxiosSecure';
+import toast, { } from "react-hot-toast";
+
 
 const ManageItems = () => {
-    const [menu] = useMenu();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    function handleDelete() {
-        setIsModalOpen(true);
+    const [menu, refetch] = useMenu();
+    const axiosSecure = useAxiosSecure()
+
+    async function handleDelete(id) {
+        const ask = await confirm('Are you sure you want to delete this item?')
+        if (ask) {
+            const res = await axiosSecure.delete(`/menu/${id}`)
+            if (res.data.deletedCount > 0) {
+                toast.success('Item Deleted')
+                refetch()
+            }
+        }
+
     }
-    const handleConfirm = () => {
-        // Handle the confirmation logic here
-        console.log('Confirmed!');
-        setIsModalOpen(false);
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
+    async function handleEdit() {
+        const result = await confirm('Do you want to edit this item?')
+    }
 
     return (
         <Container>
@@ -44,18 +51,12 @@ const ManageItems = () => {
                                 item={item}
                                 index={idx}
                                 handleDelete={handleDelete}
+                                handleEdit={handleEdit}
                             ></TableRow>)
                         }
 
                     </tbody>
                 </table>
-                {isModalOpen && (
-                    <ConfirmModal
-                        message="Are you sure you want to delete this item?"
-                        onConfirm={handleConfirm}
-                        onCancel={handleCancel}
-                    />
-                )}
             </div>
         </Container>
     );

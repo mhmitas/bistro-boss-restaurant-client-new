@@ -19,7 +19,7 @@ const AddItems = () => {
     } = useForm()
 
     async function onSubmit(data) {
-        console.log(data);
+        // console.log(data);
         // upload image to imgbb and get an url
         const image = { image: data.image[0] }
         try {
@@ -29,7 +29,7 @@ const AddItems = () => {
             if (res.data.success) {
                 const menuItem = { ...data, image: res.data.data.display_url }
                 const menuRes = await axiosSecure.post('/menu', menuItem)
-                console.log(menuItem.data);
+                console.log(menuRes.data);
                 if (menuRes.data.insertedId) {
                     toast.success('Item added succesfylly')
                     reset()
