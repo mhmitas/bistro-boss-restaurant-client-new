@@ -3,9 +3,10 @@ import { useCartItems } from '../../../components/hooks/useCart';
 import Container from '../../../components/common/container/Container';
 import { FaTrash } from 'react-icons/fa'
 import LoadingBars from '../../../components/common/loading/LoadingBars';
-import Swal from 'sweetalert2'
 import useAxiosSecure from '../../../components/hooks/useAxiosSecure';
 import toast from "react-hot-toast";
+import confirm from '../../../components/common/modal/confirm';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
     // const [cart] = useCart()
@@ -14,33 +15,18 @@ const Cart = () => {
     const [cartItems, isLoading, refetch] = useCartItems()
 
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0)
-    // console.log();
 
-    function handleDelete(id) {
-        // console.log(id);
+    async function handleDelete(id) {
+        const ask = await confirm('Are you sure? You want to remove this item from your cart.')
+        if (!ask) { return }
         try {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // i will delete it
-                    axiosSecure.delete(`/carts/${id}`)
-                        .then(res => {
-                            console.log(res.data);
-                            if (res.data.deletedCount) {
-                                toast.success('Deleted')
-                                refetch()
-                            }
-                        })
-                }
-            });
+            const res = await axiosSecure.delete(`/carts/${id}`)
+            if (res.data.deletedCount) {
+                toast.success('Deleted')
+                refetch()
+            }
         } catch (err) {
-
+            console.error(err);
         }
     }
 
@@ -49,9 +35,17 @@ const Cart = () => {
     return (
         <>
             <Container>
-                <div className='flex justify-between my-6'>
-                    <h3 className="text-2xl text-center my-4">Items: {cartItems.length}</h3>
-                    <h3 className="text-2xl text-center my-4">Total Price: ${totalPrice}</h3>
+                <div className='flex justify-between my-6 items-center'>
+                    <h3 className="text-2xl font-semibold text-center my-4">Items: {cartItems.length}</h3>
+                    <h3 className="text-2xl font-semibold text-center my-4">Total Price: ${parseFloat(totalPrice).toFixed(2)}</h3>
+                    {
+                        cartItems.length > 0 ?
+                            <Link to="/dashboard/payment">
+                                <button className='btn btn-sm btn-info'>Pay</button>
+                            </Link>
+                            :
+                            <button disabled className='btn btn-sm btn-info'>Pay</button>
+                    }
                 </div>
                 <div>
                     <div className="overflow-x-auto">

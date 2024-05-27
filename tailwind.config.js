@@ -13,6 +13,7 @@ export default {
       "dark",
       "night",
       "black",
+      "cmyk",
       {
         dashboard: {
           "primary": "#570DF8",

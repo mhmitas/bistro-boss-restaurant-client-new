@@ -43,7 +43,7 @@ const Sidebar = ({ isAdmin, isAdminLoading }) => {
     </>
 
     return (
-        <div>
+        <div className='fixed overflow-y-auto'>
             <div className="w-56 bg-base-100 h-screen overflow-y-auto">
                 <div className='p-1'>
                     <Link to='/' className="btn btn-ghost font-bold md:text-2xl text-xl">Bistro Boss</Link>
