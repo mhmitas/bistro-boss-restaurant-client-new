@@ -1,8 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
-const useMenu = (category, limit = 0) => {
-    const [menu, setMenu] = useState([])
+const useMenu = (category = '', limit = 0) => {
+    const axiosPublic = useAxiosPublic()
+    const { data: menu = [] } = useQuery({
+        queryKey: ['menu-items', category],
+        queryFn: async () => {
+            const { data } = await axiosPublic.get(`${import.meta.env.VITE_URL}/menu?category=${category}&limit=${limit}`)
+            return data
+        }
+    })
+    return [menu]
+};
+
+export default useMenu;
+
+/**
+ * const [menu, setMenu] = useState([])
     // console.log(limit);
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_URL}/menu?category=${category}&limit=${limit}`)
@@ -11,7 +25,4 @@ const useMenu = (category, limit = 0) => {
                 // console.log(res.data);
             })
     }, [])
-    return [menu]
-};
-
-export default useMenu;
+ */
