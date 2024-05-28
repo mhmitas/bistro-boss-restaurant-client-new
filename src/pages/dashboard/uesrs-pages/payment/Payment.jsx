@@ -12,6 +12,7 @@ const Payment = () => {
     return (
         <Container>
             <SectionTitle heading="Payment"></SectionTitle>
+            {/*  */}
             <Elements stripe={stripePromise}>
                 <CheckoutForm />
             </Elements>
