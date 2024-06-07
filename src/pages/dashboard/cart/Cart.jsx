@@ -17,7 +17,12 @@ const Cart = () => {
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0)
 
     async function handleDelete(id) {
-        const ask = await confirm('Are you sure? You want to remove this item from your cart.')
+        const ask = await confirm(
+            <div>
+                <h3 className='text-2xl font-bold'>Are you sure?</h3>
+                <p className='text-error'>You want to remove this item from your cart.</p>
+            </div>
+        )
         if (!ask) { return }
         try {
             const res = await axiosSecure.delete(`/carts/${id}`)
