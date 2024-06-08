@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import FoodCard from '../../../components/common/food-card/FoodCard';
-import axios from 'axios';
 
 const OrderTabContents = ({ category }) => {
     // console.log(items);

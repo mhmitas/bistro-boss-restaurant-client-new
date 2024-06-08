@@ -15,6 +15,8 @@ import AddItems from "../pages/dashboard/admin-pages/AddItems";
 import AdminRoute from "../routes/AdminRoute";
 import ManageItems from "../pages/dashboard/admin-pages/ManageItems";
 import Payment from "../pages/dashboard/uesrs-pages/payment/Payment";
+import AllMenuItems from "../pages/all-menu-items/AllMenuItems";
+import axios from "axios";
 
 export const router = createBrowserRouter([
     {
@@ -38,6 +40,11 @@ export const router = createBrowserRouter([
                 path: 'secret',
                 element: <PriverRoute><Secret /></PriverRoute>
             },
+            {
+                path: 'all-menu-items',
+                element: <AllMenuItems />,
+                loader: () => axios.get(`${import.meta.env.VITE_URL}/menu-count`)
+            }
         ]
     },
     {
